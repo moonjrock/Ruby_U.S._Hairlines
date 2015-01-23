@@ -1,52 +1,39 @@
-require('spec_helper')
-
-# DB = PG.connect({:dbname => 'test_database'})
-#
-# RSpec.configure do |config|
-#   config.after(:each) do
-#     DB.exec("DELETE FROM stylist *;")
-#   end
-# end
+require("spec_helper")
 
 describe(Client) do
   describe(".all") do
-    it("begin with no clients") do
-      expect(Stylist.all()).to(eq([]))
+    it("is empty at first") do
+      expect(Client.all()).to(eq([]))
     end
   end
 
-  describe("#save") do
-    it("lets you save clients in the database") do
-      client = Client.new({:name => "Client", :id => nil})
-      client.save()
-      expect(Client.all()).to(eq([client]))
+describe("#save") do
+  it("adds a client to the array of saved clients") do
+    test_client = Client.new({:description => "Available Client", :id => 1})
+    test_client.save()
+    expect(Client.all()).to(eq([test_client]))
     end
   end
 
+describe("#description") do
+  it("lets you read the description out") do
+    test_client = Client.new({:description => "Available Client", :id => 1})
+    expect(test_client.description()).to(eq("Available Client"))
+    end
+  end
 
-  describe("#id") do
-    it("sets its ID when you save the client") do
-      client = Client.new({:name => "Client", :id => nil})
-      client.save()
-      expect(client.id()).to(be_an_instance_of(Fixnum))
+describe("#id") do
+  it("lets you read the client ID") do
+    test_client = Client.new({:description => "Available Client", :id => 1})
+      expect(test_client.id()).to(eq(1))
     end
   end
 
   describe("#==") do
-    it("is the same client if it matches that name") do
-      client1 = Client.new({:name => "Client", :id => nil})
-      track2 = Client.new({:name => "Client", :id => nil})
+    it("is the same client if it has the same description and client ID") do
+      client1 = Client.new({:description => "Available Client", :id => 1})
+      client2 = Client.new({:description => "Available Client", :id => 1})
       expect(client1).to(eq(client2))
     end
   end
-
-  # describe(".find") do
-  #   it("returns an expense by its ID number") do
-  #     test_track = Tracker.new({:name => "Burger stuff", :id => nil})
-  #     test_track.save()
-  #     test_track2 = Tracker.new({:name => "Pizza stuff", :id => nil})
-  #     test_track2.save()
-  #     expect(Tracker.find(test_track2.id())).to(eq(test_track2))
-  #   end
-  # end
 end

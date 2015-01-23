@@ -3,7 +3,7 @@ require("pg")
 require("stylist")
 require("client")
 
-DB = PG.connect({:dbname => "test_database"})
+DB = PG.connect({:dbname => "hair_salon"})
 
 RSpec.configure do |config|
   config.after(:each) do

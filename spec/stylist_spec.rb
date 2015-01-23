@@ -1,39 +1,43 @@
-require("spec_helper")
+require('spec_helper')
 
 describe(Stylist) do
   describe(".all") do
-    it("is empty at first") do
+    it("begin with no stylists") do
       expect(Stylist.all()).to(eq([]))
     end
   end
 
-describe("#save") do
-  it("adds a stylist to the array of saved stylists") do
-    test_stylist = Stylist.new({:description => "Available Stylist", :id => 1})
-    test_stylist.save()
-    expect(Stylist.all()).to(eq([test_stylist]))
+  describe("#save") do
+    it("lets you save Stylist in the database") do
+      stylist = Stylist.new({:name => "Stylist", :id => nil})
+      stylist.save()
+      expect(Stylist.all()).to(eq([stylist]))
     end
   end
 
-describe("#description") do
-  it("lets you read the description out") do
-    test_stylist = Stylists.new({:description => "Available Stylist", :id => 1})
-    expect(test_stylist.description()).to(eq("Available Stylist"))
-    end
-  end
-
-describe("#id") do
-  it("lets you read the stylist ID") do
-    test_stylist = Stylist.new({:description => "Available Stylist", :id => 1})
-      expect(test_stylist.id()).to(eq(1))
+  describe("#id") do
+    it("sets its ID when you save the stylist") do
+      stylist = Stylist.new({:name => "Stylist", :id => nil})
+      stylist.save()
+      expect(stylist.id()).to(be_an_instance_of(Fixnum))
     end
   end
 
   describe("#==") do
-    it("is the same stylist if it has the same description and stylist ID") do
-      stylist1 = Stylist.new({:description => "Available Stylist", :id => 1})
-      stylist2 = Stylist.new({:description => "Available Stylist", :id => 1})
+    it("is the same stylist if it matches that name") do
+      client1 = Stylist.new({:name => "Stylist", :id => nil})
+      track2 = Stylist.new({:name => "Stylist", :id => nil})
       expect(stylist1).to(eq(stylist2))
+    end
+  end
+
+  describe(".find") do
+    it("returns an stylist by its ID number") do
+      test_stylist = Stylist.new({:name => "Kim", :id => nil})
+      test_stylist.save()
+      test_stylistt2 = Stylist.new({:name => "Gina", :id => nil})
+      test_stylist2.save()
+      expect(Stylist.find(test_stylist2.id())).to(eq(test_stylist2))
     end
   end
 end
