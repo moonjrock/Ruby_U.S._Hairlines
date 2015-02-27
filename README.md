@@ -1,13 +1,12 @@
-Welcome to the Hair Salon
+<h1>Welcome to the Hair Salon</h1>
 
 The Hair Salon is a simple application that helps a stylist keep track of
 their business. As a stylist, you're able to enter in your own name
 and create your list of clients. You're also able to edit or delete your name to start a fresh list of clients.
 
-INSTRUCTIONS
+<h2>INSTRUCTIONS</h2>
 
-~Open terminal~ psql
-
+<h3>~OPEN TERMINAL ~psql</h3>
 Create two databases: hair_salon and hair_salon_test
  <p>Within the hair_salon database, create 2 tables: stylists and clients.</p>
  <p>Within the stylists table, (ID serial PRIMARY KEY, stylist_name varchar)</p>
@@ -16,7 +15,7 @@ Create two databases: hair_salon and hair_salon_test
  <p>(1. DROP DATABASE hair_salon_test)</p>
  <p>(2. CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;)</p>
 
-~Open terminal~ ruby
+<h3>~OPEN TERMINAL~ ruby</h3>
 <p>Change directory to desktop, then hair_salon.</p>
 <p>$gem install bundler</p>
 <p>$bundle</p>
@@ -30,8 +29,8 @@ Create two databases: hair_salon and hair_salon_test
 <p>If not, click "Return to Main Page"</p>
 
 
-Known Bugs
-No known bugs at this time.
+<h3>Known Bugs</h3>
+<p>No known bugs at this time.</p>
 
 Author: Alan Moon (https://github.com/moonjrock)
 
