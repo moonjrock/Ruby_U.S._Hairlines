@@ -8,17 +8,8 @@ require("pg")
 DB = PG.connect({:dbname => "hair_salon"})
 
 get("/") do
-  @stylist = Stylist.all()
+  @stylists = Stylist.all()
   erb(:index)
-end
-
-post("/clients") do
-  description = params.fetch("description")
-  stylist_id = params.fetch("stylist_id").to_i()
-  task = Client.new({:description => description, :stylist_id => stylist_id})
-  task.save()
-  @list = Stylist.find(stylist_id)
-  erb(:stylist)
 end
 
 post("/stylists") do
@@ -30,6 +21,34 @@ post("/stylists") do
 end
 
 get("/stylists/:id") do
-  @stylist = stylist.find(params.fetch("id").to_i())
+  @stylist = Stylist.find(params.fetch("id").to_i())
   erb(:stylist)
+end
+
+post("/clients") do
+  name = params.fetch("name")
+  stylist_id = params.fetch("stylist_id").to_i()
+  client = Client.new({:name => name, :stylist_id => stylist_id})
+  client.save()
+  @stylist = Stylist.find(stylist_id)
+  erb(:stylist)
+end
+
+get("/stylists/:id/edit") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  erb(:stylist_edit)
+end
+
+patch("/stylists/:id") do
+  name = params.fetch("name")
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @stylist.update({:name => name})
+  erb(:stylist)
+end
+
+delete("/stylists/:id") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @stylist.delete()
+  @stylists = Stylist.all()
+  erb(:index)
 end

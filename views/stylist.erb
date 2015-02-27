@@ -1,25 +1,25 @@
-<h1>Connect <%= @stylist.name() %> </h1>
+<h1>Add a client to <%= @stylist.name() %> </h1>
 
 <form action="/clients" method="post">
   <input id="stylist_id" name="stylist_id" type="hidden" value="<%= @stylist.id() %>">
 
-  <label for="description">Description of the client:</label>
-  <input id="description" name="description" type="text">
+  <label for="name">NAME:</label>
+  <input id="name" name="name" type="text">
 
   <button type="submit">Add client</button>
 </form>
 
 <% if @stylist.clients().any?() %>
-<h3>Here are all the clients:</h3>
+  <h3>Clients:</h3>
 
-<ul>
-  <% @stylist.clients().each() do |client| %>
-  <li><%= client.description() %></li>
-  <% end %>
-
-</ul>
+  <ul>
+    <% @stylist.clients().each() do |client| %>
+      <li><%= client.name() %></li>
+    <% end %>
+  </ul>
 <% else %>
-<p>There are no clients yet!</p>
+  <p>There are no clients yet!</p>
 <% end %>
 
+<p><a href="/stylists/<%= @stylist.id() %>/edit">Edit <%= @stylist.name() %> </a></p>
 <a href="/">Return to Main Page</a>
